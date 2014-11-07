@@ -36,6 +36,7 @@ double Sum(int num, ...)
 	return sum;
 }
 
+///////////////////////////////////////////////////////////////////////////////////
 /*
 	This is a challenge problem found on:
 	- http://www.cprogramming.com/challenges/celsius_converter_table.html
@@ -76,12 +77,44 @@ void TempConverterChallenge()
 	for (int i = 0; i < upperLimit - lowerLimit; i += stepSize)
 		cout << (lowerLimit + i) << " \t\t " << CToF(lowerLimit + i) << endl;
 }
+///////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////
+/*
+	Prime Test
+
+	All numbers passed do not have to be positive and negatives are taken into account.
+	This check will work for all values passed of the given type.
+*/
+bool PrimeTest(int p)
+{
+	// Check for negative numbers
+	if (p < 0) p *= -1;
+
+	// Major check for known prime values below 10
+	if (p != 0 && p != 1 && p != 2 && p != 3 && p != 5 && p != 7)
+	{
+		// Minor checks using known prime numbers to get "rid" of non prime values.
+		if (p % 2 == 0) return false;
+		if (p % 3 == 0) return false;
+		if (p % 5 == 0) return false;
+		if (p % 7 == 0) return false;
+	}
+
+	return true;
+}
+///////////////////////////////////////////////////////////////////////////////////
 
 int main()
 {
-	cout << Sum(3, 10.0, 12.0, 10.0) << endl;
+	// Used for printing boolean values
+	cout.setf(std::ios::boolalpha);
 
-	TempConverterChallenge();
+	//cout << Sum(3, 10.0, 12.0, 10.0) << endl;
+
+	//TempConverterChallenge();
+
+	cout << PrimeTest(-2) << endl;
 
 	return EXIT_SUCCESS;
 }
