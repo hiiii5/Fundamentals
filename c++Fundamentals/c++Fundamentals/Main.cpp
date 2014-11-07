@@ -137,6 +137,42 @@ void QuickSort(int arr[], int left, int right)
 }
 ///////////////////////////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////////////////////////////////
+/*
+	Finding if a point lies within a triangle.
+
+	To solve for if an arbitrary point(P) lies within an arbitrary triangle(ABC),
+	find the area of triangle ABC(A), if it is equal to the area of
+	triangles PAB, PBC, and PAC, then P is within ABC.
+
+	As an exercise in practice, finding a point within a polygon is given as well.
+*/
+
+float area(int x1, int y1, int x2, int y2, int x3, int y3) { return abs( (x1*(y2 - y3) + x2*(y3 - y1) + x3*(y1 - y2)) / 2.0 ); }
+
+bool isInside(int x1, int y1, int x2, int y2, int x3, int y3, int x, int y)
+{
+	float A = area(x1, y1, x2, y2, x3, y3);
+
+	float A1 = area(x, y, x2, y2, x3, y3);
+	float A2 = area(x1, y1, x, y, x3, y3);
+	float A3 = area(x1, y1, x2, y2, x, y);
+
+	return (A == A1 + A2 + A3);
+}
+
+bool isInsidePoly(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4, int x, int y)
+{
+	if (isInside(x1, y1, x2, y2, x4, y4, x, y) == true)
+		return true;
+	if (isInside(x2, y2, x3, y3, x4, y4, x, y) == true)
+		return true;
+
+	return false;
+}
+
+///////////////////////////////////////////////////////////////////////////////////
+
 int main()
 {
 	// Used for printing boolean values
@@ -148,12 +184,17 @@ int main()
 
 	//cout << PrimeTest(-2) << endl;
 
+	/*
 	int arr[] = { 1, 3, 2, 7, 10, 2, 5 };
 
 	QuickSort(arr, 0, (sizeof(arr)/sizeof(int)) - 1);
 
 	for (int x = 0; x < (sizeof(arr) / sizeof(int)); x++)
 		cout << arr[x] << endl;
+	*/
+
+	cout << isInside(0, 0, 20, 0, 10, 30, 10, 15) << endl;
+	cout << isInsidePoly(0, 0, 10, 0, 10, 10, 0, 10, -1, 0) << endl;
 
 	return EXIT_SUCCESS;
 }
