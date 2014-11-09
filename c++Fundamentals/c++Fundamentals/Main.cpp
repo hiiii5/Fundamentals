@@ -173,6 +173,37 @@ bool isInsidePoly(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4
 
 ///////////////////////////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////////////////////////////////
+/*
+	Bubble Sort
+*/
+
+void BubbleSort(int arr[], int left, int right)
+{
+	bool swapped = true;
+	int temp;
+
+	do
+	{
+		swapped = false;
+
+		for (int i = left; i < right; i++)
+		{
+			temp = arr[i];
+
+			if (arr[i] > arr[i + 1])
+			{
+				arr[i] = arr[i + 1];
+				arr[i + 1] = temp;
+
+				swapped = true;
+			}
+		}
+	} while (swapped == true);
+}
+
+///////////////////////////////////////////////////////////////////////////////////
+
 int main()
 {
 	// Used for printing boolean values
@@ -184,17 +215,20 @@ int main()
 
 	//cout << PrimeTest(-2) << endl;
 
-	/*
+	
 	int arr[] = { 1, 3, 2, 7, 10, 2, 5 };
 
-	QuickSort(arr, 0, (sizeof(arr)/sizeof(int)) - 1);
+	/*
+	QuickSort(arr, 0, (sizeof(arr)/sizeof(int)) - 1);*/
+
+	BubbleSort(arr, 0, (sizeof(arr) / sizeof(int)) - 1);
 
 	for (int x = 0; x < (sizeof(arr) / sizeof(int)); x++)
 		cout << arr[x] << endl;
-	*/
+	
 
-	cout << isInside(0, 0, 20, 0, 10, 30, 10, 15) << endl;
-	cout << isInsidePoly(0, 0, 10, 0, 10, 10, 0, 10, -1, 0) << endl;
+	//cout << isInside(0, 0, 20, 0, 10, 30, 10, 15) << endl;
+	//cout << isInsidePoly(0, 0, 10, 0, 10, 10, 0, 10, -1, 0) << endl;
 
 	return EXIT_SUCCESS;
 }
